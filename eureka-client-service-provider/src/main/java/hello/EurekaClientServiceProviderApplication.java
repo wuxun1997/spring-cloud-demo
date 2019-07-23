@@ -1,6 +1,7 @@
 package hello;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
@@ -22,6 +23,9 @@ public class EurekaClientServiceProviderApplication {
 @RestController
 class ServiceInstanceRestController {
 
+    @Value("${server.port}")
+    private String port;
+
     @Autowired
     private DiscoveryClient discoveryClient;
 
@@ -33,6 +37,6 @@ class ServiceInstanceRestController {
 
     @RequestMapping("/hello")
     public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-        return "Hello, " + name;
+        return "Hello, " + name + "---------port: " + port;
     }
 }

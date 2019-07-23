@@ -18,13 +18,9 @@ public class ConusmerServiceImpl implements ConsumerService {
     @Autowired
     private RestTemplate restTemplate;
 
-//    @Autowired
-//    private LoadBalancerClient loadBalancerClient;
-
     @Override
     @HystrixCommand(fallbackMethod = "backupCall")
     public String call(String name) {
-//        loadBalancerClient.choose("a-bootiful-client");
         ResponseEntity resultResponseEntity = restTemplate.postForEntity(appServiceUrl + "hello?name=" + name, null, String.class);
         if (resultResponseEntity != null && resultResponseEntity.getBody() != null) {
             return name + " says: " + resultResponseEntity.getBody().toString();
@@ -32,7 +28,6 @@ public class ConusmerServiceImpl implements ConsumerService {
         return null;
     }
 
-    @Override
     public String backupCall(String name) {
         return "Hi, I'm Hystix.";
     }

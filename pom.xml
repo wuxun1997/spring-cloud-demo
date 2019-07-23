@@ -9,9 +9,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>eureka-service</module>
         <module>eureka-client-service-client</module>
         <module>eureka-client-service-provider</module>
-        <module>eureka-service</module>
         <module>feign</module>
         <module>gateway</module>
         <module>zipkin</module>
